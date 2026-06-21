@@ -3,7 +3,8 @@ name: Email Daily Expense Report
 on:
   workflow_dispatch:
   schedule:
-    - cron: "59 4 * * *"
+    - cron: "59 23 * * *"
+      timezone: "America/Chicago"
 
 jobs:
   email-report:
@@ -13,14 +14,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Show files
+        run: |
+          pwd
+          ls -la
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Install dependencies
-        run: |
-          pip install openpyxl
 
       - name: Send expense report
         env:
